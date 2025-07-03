@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Giám sát nhiệt độ</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 100px; }
+    .temp { font-size: 3rem; color: #e63946; }
+  </style>
+</head>
+<body>
+  <h1>🚚 Giám sát nhiệt độ</h1>
+  <div class="temp" id="temp">-- °C</div>
+  <p id="time">Đang tải...</p>
+
+  <script>
+    async function fetchData() {
+      const res = await fetch('/api/net');
+      const data = await res.json();
+      document.getElementById('temp').innerText = `${data.temp} °C`;
+      document.getElementById('time').innerText = `🕒 ${new Date(data.time).toLocaleString()}`;
+    }
+
+    fetchData();
+    setInterval(fetchData, 5000);
+  </script>
+</body>
+</html>
