@@ -1,6 +1,6 @@
 let latestData = { temp: 0, time: new Date().toISOString() };
 
-export default async function handler(req, res) {
+export default function handler(req, res) {
   if (req.method === "POST") {
     const { temp } = req.body;
     latestData = { temp, time: new Date().toISOString() };
@@ -9,5 +9,5 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     return res.status(200).json(latestData);
   }
-  res.status(405).json({ message: "Method not allowed" });
+  res.status(405).end(); // Method Not Allowed
 }
